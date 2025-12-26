@@ -1,0 +1,49 @@
+# Git
+.git
+.gitignore
+
+# Mix artifacts
+/_build
+/deps
+*.ez
+
+# Generated on crash by the VM
+erl_crash.dump
+
+# Static artifacts - These are re-built during Docker build
+/priv/static/assets
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Environment files
+.env
+.env.*
+
+# Editor and IDE files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# CI/CD
+.github
+
+# Docker files (don't copy these into the image)
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Documentation
+README.md
+AGENTS.md
+
+# Test coverage
+cover/

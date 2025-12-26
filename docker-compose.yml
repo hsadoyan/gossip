@@ -1,0 +1,19 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      PHX_HOST: ${PHX_HOST:-localhost}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      DATABASE_PATH: /app/data/gossip.db
+      PORT: ${PORT:-4000}
+    volumes:
+      # Persist the SQLite database
+      - gossip_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  gossip_data:
