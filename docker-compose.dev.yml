@@ -1,0 +1,53 @@
+services:
+  # Development service with live code reloading
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    command: >
+      sh -c "
+        mix deps.get &&
+        mix assets.setup &&
+        mix ecto.setup &&
+        mix phx.server
+      "
+    ports:
+      - "4000:4000"
+    environment:
+      MIX_ENV: dev
+    volumes:
+      - .:/app
+      - dev_deps:/app/deps
+      - dev_build:/app/_build
+    stdin_open: true
+    tty: true
+
+  # Test service for running tests in Docker
+  test:
+    image: elixir:1.19.4-otp-28-alpine
+    working_dir: /app
+    command: >
+      sh -c "
+        apk add --no-cache build-base git &&
+        mix local.hex --force &&
+        mix local.rebar --force &&
+        mix deps.get &&
+        mix assets.setup &&
+        mix test
+      "
+    environment:
+      MIX_ENV: test
+    volumes:
+      - .:/app
+      - test_deps:/app/deps
+      - test_build:/app/_build
+    profiles:
+      - test
+
+volumes:
+  dev_deps:
+  dev_build:
+  dev_db:
+  test_deps:
+  test_build:
