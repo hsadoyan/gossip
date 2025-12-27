@@ -10,9 +10,14 @@ The easiest way to run Gossip is using Docker:
    ```bash
    cp .env.example .env
    ```
-   Edit .env and set SECRET_KEY_BASE (generate with: mix phx.gen.secret)
+2. **Generate a SECRET_KEY_BASE**
+   ```bash
+   mix deps.get #get dependencies for Phoenix
+   mix phx.gen.secret #generate the secret_base_key
+   ```
+   Then, edit .env and set SECRET_KEY_BASE 
 
-2. **Start the application**:
+3. **Start the application**:
    ```bash
    docker compose up
    ```
