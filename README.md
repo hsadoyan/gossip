@@ -10,12 +10,14 @@ The easiest way to run Gossip is using Docker:
    ```bash
    cp .env.example .env
    ```
-2. **Generate a SECRET_KEY_BASE**
+2. **Generate a SECRET_KEY_BASE**:
+
+   First, we generate a random 64 digit alphanumeric key
    ```bash
-   mix deps.get #get dependencies for Phoenix
-   mix phx.gen.secret #generate the secret_base_key
+   openssl rand -hex 32
    ```
-   Then, edit .env and set SECRET_KEY_BASE 
+
+   Then, edit .env and set SECRET_KEY_BASE=YOUR_GENERATED_KEY
 
 3. **Start the application**:
    ```bash
